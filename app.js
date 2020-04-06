@@ -13,14 +13,14 @@ class GroceryListItem extends React.Component {
 
     render() {
         var style = {
-            textDecoration: this.state.done ? 'line-through' : 'none'
+            fontWeight: this.state.done ? 'bold' : 'none'
         };
-        console.log(this.props.items)
-        for(let item of this.props.items) {
-            return <li style={style} onClick={this.onListItemHover.bind(this)}>{item}</li>
-        }
-            
-        
+        return (
+            <li style={style} onMouseOver={this.onListItemHover.bind(this)}>{this.props.grocery}</li>
+        )
+
+
+
     }
 }
 
@@ -28,10 +28,12 @@ class GroceryListItem extends React.Component {
 // const grocery = new GroceryListItem(items);
 
 const GroceryList = (props) => {
-    
+    console.log(props)
     return (
         <ul>
-            <GroceryListItem items={["bread", "milk"]} />
+            {props.items.map(item =>
+                <GroceryListItem grocery={item} />
+            )}
         </ul>
 
     )
@@ -44,4 +46,4 @@ const GroceryList = (props) => {
 
 
 
-ReactDOM.render(<GroceryList />, document.getElementById("app"));
+ReactDOM.render(<GroceryList items={["bread", "milk"]} />, document.getElementById("app"));
